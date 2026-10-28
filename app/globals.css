@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/*
+  Layout: public site is a single centered column with wide bands;
+  dashboards are a fixed sidebar plus a scrolling work area.
+  Palette: brick-and-ink warehouse tones, with larkspur blue as the one accent.
+*/
+:root {
+  --paper: #f6f5f2;
+  --surface: #ffffff;
+  --sunken: #eeece7;
+  --ink: #1d2126;
+  --ink-soft: #5a6069;
+  --line: #dddad3;
+  --accent: #2f4fa8;
+  --accent-ink: #ffffff;
+  --accent-soft: #e3e8f6;
+  --brick: #a2482f;
+  --good: #2e7d4f;
+  --good-soft: #e1f0e6;
+  --warn: #9a6400;
+  --warn-soft: #f6ecd6;
+  --bad: #b3261e;
+  --bad-soft: #f8e1df;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #15181c;
+    --surface: #1c2025;
+    --sunken: #111317;
+    --ink: #e8e6e1;
+    --ink-soft: #a0a5ad;
+    --line: #2c3138;
+    --accent: #8fa8ec;
+    --accent-ink: #10162a;
+    --accent-soft: #232c45;
+    --brick: #d9876c;
+    --good: #6fca93;
+    --good-soft: #1c3226;
+    --warn: #e2b25a;
+    --warn-soft: #3a2f17;
+    --bad: #f08a80;
+    --bad-soft: #3d1f1d;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-brick: var(--brick);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
