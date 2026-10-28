@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${shoulders.variable} ${stencil.variable} ${schibsted.variable} ${martian.variable}`}>
-      <body className="min-h-screen">
+      <body className="flex min-h-screen flex-col">
         <ToastProvider>
           <DemoBar />
           {children}

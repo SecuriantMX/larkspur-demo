@@ -8,7 +8,7 @@ export function DemoBar() {
   const [confirming, setConfirming] = useState(false);
 
   return (
-    <div className="bg-board font-mono text-[0.6875rem] text-board-ink">
+    <div data-demo-bar className="bg-board font-mono text-[0.6875rem] text-board-ink">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-[max(16px,env(safe-area-inset-left))] py-1.5">
         <p>
           <span className="mr-2 bg-tape px-1 text-tape-ink">DEMO</span>

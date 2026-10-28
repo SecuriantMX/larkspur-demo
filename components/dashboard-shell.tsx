@@ -100,7 +100,7 @@ export function DashboardShell({
   );
 
   return (
-    <div className="lg:grid lg:min-h-[calc(100vh-1.75rem)] lg:grid-cols-[15rem_1fr]">
+    <div className="flex-1 lg:grid lg:grid-cols-[15rem_1fr]">
       <aside className="hidden bg-board text-board-ink lg:flex lg:flex-col lg:gap-6 lg:px-3 lg:py-5">
         <div className="flex flex-col gap-3 px-3">
           <Logo name={state.content.siteName} href={role === "admin" ? "/admin" : "/app"} inverted />
