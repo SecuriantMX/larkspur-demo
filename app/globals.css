@@ -1,48 +1,57 @@
 @import "tailwindcss";
 
 /*
-  Layout: public site is a single centered column with wide bands;
-  dashboards are a fixed sidebar plus a scrolling work area.
-  Palette: brick-and-ink warehouse tones, with larkspur blue as the one accent.
+  Concept: a working warehouse. Poured-concrete grounds, black stencil signage,
+  yellow floor-marking tape for anything you can act on, red for "in use".
+  Public pages read like the building itself (floor plan, posted rate sheet);
+  dashboards read like the front desk's ledger and directory board.
 */
 :root {
-  --paper: #f6f5f2;
-  --surface: #ffffff;
-  --sunken: #eeece7;
-  --ink: #1d2126;
-  --ink-soft: #5a6069;
-  --line: #dddad3;
-  --accent: #2f4fa8;
-  --accent-ink: #ffffff;
-  --accent-soft: #e3e8f6;
-  --brick: #a2482f;
-  --good: #2e7d4f;
-  --good-soft: #e1f0e6;
-  --warn: #9a6400;
-  --warn-soft: #f6ecd6;
-  --bad: #b3261e;
-  --bad-soft: #f8e1df;
+  --paper: #e6e3dc;
+  --surface: #f3f1ec;
+  --sunken: #d8d4ca;
+  --ink: #161513;
+  --ink-soft: #5d5a52;
+  --line: #b9b4a7;
+  --accent: #161513;
+  --accent-ink: #f5c518;
+  --accent-soft: #f5c518;
+  --tape: #f5c518;
+  --tape-ink: #161513;
+  --board: #161513;
+  --board-ink: #f3f1ec;
+  --brick: #c4361f;
+  --good: #2f6b3f;
+  --good-soft: #d3e2cf;
+  --warn: #8a5a00;
+  --warn-soft: #f1dfae;
+  --bad: #b02a17;
+  --bad-soft: #f2d1c8;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #15181c;
-    --surface: #1c2025;
-    --sunken: #111317;
-    --ink: #e8e6e1;
-    --ink-soft: #a0a5ad;
-    --line: #2c3138;
-    --accent: #8fa8ec;
-    --accent-ink: #10162a;
-    --accent-soft: #232c45;
-    --brick: #d9876c;
-    --good: #6fca93;
-    --good-soft: #1c3226;
-    --warn: #e2b25a;
-    --warn-soft: #3a2f17;
-    --bad: #f08a80;
-    --bad-soft: #3d1f1d;
+    --paper: #131311;
+    --surface: #1c1b18;
+    --sunken: #0b0b0a;
+    --ink: #ece9e1;
+    --ink-soft: #9d998e;
+    --line: #3a3832;
+    --accent: #f5c518;
+    --accent-ink: #161513;
+    --accent-soft: #f5c518;
+    --tape: #f5c518;
+    --tape-ink: #161513;
+    --board: #070706;
+    --board-ink: #ece9e1;
+    --brick: #ff6a4d;
+    --good: #7cc58e;
+    --good-soft: #1d3322;
+    --warn: #f0c35a;
+    --warn-soft: #3a2f12;
+    --bad: #ff8a73;
+    --bad-soft: #3d1c15;
     color-scheme: dark;
   }
 }
@@ -57,6 +66,10 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
+  --color-tape: var(--tape);
+  --color-tape-ink: var(--tape-ink);
+  --color-board: var(--board);
+  --color-board-ink: var(--board-ink);
   --color-brick: var(--brick);
   --color-good: var(--good);
   --color-good-soft: var(--good-soft);
@@ -64,9 +77,13 @@
   --color-warn-soft: var(--warn-soft);
   --color-bad: var(--bad);
   --color-bad-soft: var(--bad-soft);
-  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-display: var(--font-shoulders), "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, "SFMono-Regular", monospace;
+  --font-stencil: var(--font-bss), var(--font-shoulders), "Arial Narrow", sans-serif;
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 3px;
 }
 
 html {
@@ -87,12 +104,63 @@ h3 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ink);
   outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--tape);
 }
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* Text links get a strip of floor tape instead of a colored word. */
+a.text-accent {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--tape);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+}
+a.text-accent:hover {
+  background: var(--tape);
+  color: var(--tape-ink);
+}
+
+/* Diagonal hazard striping, used for "occupied" on plans and schedules. */
+.hazard {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--brick) 0 6px,
+    color-mix(in srgb, var(--brick) 35%, transparent) 6px 12px
+  );
+}
+
+.tape {
+  background: var(--tape);
+  color: var(--tape-ink);
+}
+
+/* Stencil-style signage label. */
+.sign {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Subtle concrete texture so large grounds don't read as flat UI grey. */
+.concrete {
+  background-color: var(--paper);
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 7%, transparent) 0.6px, transparent 0.7px);
+  background-size: 5px 5px;
 }
 
 @media (prefers-reduced-motion: reduce) {

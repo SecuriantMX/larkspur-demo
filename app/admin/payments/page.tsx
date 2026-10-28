@@ -72,8 +72,8 @@ export default function AdminPayments() {
           { label: "Net", value: money(gross - refunded) },
         ].map((k) => (
           <Panel key={k.label} className="p-5">
-            <p className="text-xs font-medium tracking-wide text-ink-soft uppercase">{k.label}</p>
-            <p className="tabular mt-1 font-display text-2xl font-semibold">{k.value}</p>
+            <p className="eyebrow text-ink-soft">{k.label}</p>
+            <p className="tabular mt-1 font-stencil text-4xl leading-none">{k.value}</p>
           </Panel>
         ))}
       </div>

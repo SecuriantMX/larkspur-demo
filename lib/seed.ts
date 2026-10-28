@@ -1,7 +1,7 @@
 import { defaultContent, defaultPlans, defaultSpaces } from "./content";
 import type { ActivityEntry, Booking, Notification, Payment, State, Ticket, User } from "./types";
 
-export const STATE_VERSION = 1;
+export const STATE_VERSION = 2;
 
 const DAY = 86_400_000;
 const HOUR = 3_600_000;

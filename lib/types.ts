@@ -20,6 +20,7 @@ export type SpaceKind = "Meeting room" | "Private office" | "Studio" | "Desk";
 
 export interface Space {
   id: string;
+  unit: string; // door number on the building plan, e.g. "1A"
   name: string;
   kind: SpaceKind;
   description: string;

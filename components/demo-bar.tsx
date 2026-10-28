@@ -8,10 +8,11 @@ export function DemoBar() {
   const [confirming, setConfirming] = useState(false);
 
   return (
-    <div className="border-b border-line bg-sunken text-xs text-ink-soft">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-[max(16px,env(safe-area-inset-left))] py-1.5">
+    <div className="bg-board font-mono text-[0.6875rem] text-board-ink">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-[max(16px,env(safe-area-inset-left))] py-1.5">
         <p>
-          Demo build with sample data. Changes are saved in this browser only.
+          <span className="mr-2 bg-tape px-1 text-tape-ink">DEMO</span>
+          Sample data. Changes are saved in this browser only.
           <span className="hidden sm:inline"> Member: member@larkspur.demo / demo1234 · Admin: admin@larkspur.demo / admin1234</span>
         </p>
         {state &&
@@ -19,7 +20,7 @@ export function DemoBar() {
             <span className="flex items-center gap-2">
               Reset all demo data?
               <button
-                className="font-medium text-bad underline"
+                className="font-medium underline"
                 onClick={() => {
                   resetDemo();
                   setConfirming(false);
@@ -33,7 +34,7 @@ export function DemoBar() {
               </button>
             </span>
           ) : (
-            <button className="underline hover:text-ink" onClick={() => setConfirming(true)}>
+            <button className="underline" onClick={() => setConfirming(true)}>
               Reset demo
             </button>
           ))}

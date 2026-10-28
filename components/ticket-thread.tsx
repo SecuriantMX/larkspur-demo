@@ -27,7 +27,7 @@ export function TicketThread({ ticket, staffView = false }: { ticket: Ticket; st
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="min-w-0">
-          <h2 className="font-display text-lg font-semibold">{ticket.subject}</h2>
+          <h2 className="font-display text-3xl leading-none font-extrabold uppercase">{ticket.subject}</h2>
           <p className="text-sm text-ink-soft">
             {ticket.name} · {ticket.email} · via {ticket.source}
           </p>
@@ -40,11 +40,11 @@ export function TicketThread({ ticket, staffView = false }: { ticket: Ticket; st
           <li
             key={m.id}
             className={cx(
-              "max-w-[85%] rounded-lg px-4 py-3 text-sm",
-              m.fromStaff ? "self-start bg-sunken" : "self-end bg-accent-soft",
+              "max-w-[85%] border px-4 py-3 text-sm",
+              m.fromStaff ? "self-start border-ink bg-ink text-paper" : "self-end border-line bg-surface",
             )}
           >
-            <p className="mb-1 text-xs text-ink-soft">
+            <p className="eyebrow mb-1.5 opacity-70">
               {m.authorName}
               {m.fromStaff && " · Front desk"} · {dateTime(m.createdAt)}
             </p>

@@ -142,7 +142,7 @@ export default function AdminUsers() {
                   <tr key={u.id} className={cx(u.status === "suspended" && "opacity-70")}>
                     <td className={td}>
                       <div className="flex items-center gap-3">
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sunken text-xs font-semibold">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-ink font-mono text-[0.6875rem] text-paper">
                           {initials(u.name)}
                         </span>
                         <div className="min-w-0">

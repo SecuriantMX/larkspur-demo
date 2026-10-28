@@ -51,7 +51,7 @@ export default function AdminCatalog() {
     setSpace(
       s
         ? { ...s, hourlyRate: toDollars(s.hourlyRate), capacity: String(s.capacity) }
-        : { id: uid("sp"), name: "", kind: "Meeting room", description: "", capacity: "4", hourlyRate: "30.00", active: true },
+        : { id: uid("sp"), unit: "", name: "", kind: "Meeting room", description: "", capacity: "4", hourlyRate: "30.00", active: true },
     );
   }
 
@@ -116,7 +116,10 @@ export default function AdminCatalog() {
             <tbody className="divide-y divide-line">
               {state.spaces.map((s) => (
                 <tr key={s.id}>
-                  <td className={cx(td, "font-medium")}>{s.name}</td>
+                  <td className={cx(td, "font-medium")}>
+                    <span className="mr-2 font-mono text-xs text-ink-soft">{s.unit || "—"}</span>
+                    {s.name}
+                  </td>
                   <td className={cx(td, "text-ink-soft")}>{s.kind}</td>
                   <td className={cx(td, "text-right tabular")}>{s.capacity}</td>
                   <td className={cx(td, "text-right tabular")}>{money(s.hourlyRate)}/h</td>
@@ -193,9 +196,14 @@ export default function AdminCatalog() {
       >
         {space && (
           <div className="flex flex-col gap-4">
-            <Field label="Name" htmlFor="space-name">
-              <Input id="space-name" value={space.name} onChange={(e) => setSpace({ ...space, name: e.target.value })} />
-            </Field>
+            <div className="grid gap-4 sm:grid-cols-[1fr_7rem]">
+              <Field label="Name" htmlFor="space-name">
+                <Input id="space-name" value={space.name} onChange={(e) => setSpace({ ...space, name: e.target.value })} />
+              </Field>
+              <Field label="Unit" hint="Door number" htmlFor="space-unit">
+                <Input id="space-unit" value={space.unit} maxLength={4} onChange={(e) => setSpace({ ...space, unit: e.target.value.toUpperCase() })} />
+              </Field>
+            </div>
             <div className="grid gap-4 sm:grid-cols-3">
               <Field label="Type" htmlFor="space-kind">
                 <Select id="space-kind" value={space.kind} onChange={(e) => setSpace({ ...space, kind: e.target.value as SpaceKind })}>

@@ -42,8 +42,8 @@ export default function BillingPage() {
 
       <Panel className="flex flex-wrap items-center justify-between gap-4 p-5">
         <div>
-          <p className="text-xs font-medium tracking-wide text-ink-soft uppercase">Current plan</p>
-          <p className="mt-1 font-display text-xl font-semibold">{current?.name ?? "Pay as you go"}</p>
+          <p className="eyebrow text-ink-soft">Current plan</p>
+          <p className="sign mt-1 text-4xl">{current?.name ?? "Pay as you go"}</p>
           <p className="text-sm text-ink-soft">
             {current ? `${money(current.monthlyPrice)} billed monthly to Visa ending 4242` : "No membership. Rooms are billed per booking."}
           </p>
@@ -78,9 +78,9 @@ export default function BillingPage() {
         {plans.map((p) => {
           const isCurrent = p.id === user.planId;
           return (
-            <Panel key={p.id} className={cx("flex flex-col p-5", isCurrent && "border-accent ring-1 ring-accent")}>
+            <Panel key={p.id} className={cx("flex flex-col p-5", isCurrent && "border-2 border-ink")}>
               <div className="flex items-center justify-between">
-                <p className="font-display text-lg font-semibold">{p.name}</p>
+                <p className="font-display text-3xl font-extrabold uppercase">{p.name}</p>
                 {isCurrent && <Badge tone="accent">Current</Badge>}
               </div>
               <p className="tabular mt-1 text-sm text-ink-soft">{money(p.monthlyPrice)} / month</p>
@@ -122,7 +122,7 @@ export default function BillingPage() {
                 {payments.map((p) => (
                   <tr key={p.id}>
                     <td className={td}>
-                      <button className="font-mono text-sm text-accent hover:underline" onClick={() => setInvoice(p)}>
+                      <button className="font-mono text-sm underline decoration-tape decoration-2 underline-offset-2 hover:bg-tape hover:text-tape-ink" onClick={() => setInvoice(p)}>
                         {p.invoiceNumber}
                       </button>
                     </td>
@@ -161,11 +161,11 @@ export default function BillingPage() {
               <span>{checkoutPlan.name} membership, monthly</span>
               <span className="tabular font-semibold">{money(checkoutPlan.monthlyPrice)}</span>
             </div>
-            <div className="rounded-md border border-line p-3">
+            <div className="border border-line p-3">
               <p className="text-xs text-ink-soft">Payment method</p>
               <p className="mt-1 font-mono">Visa •••• 4242 · exp 08/29</p>
             </div>
-            <p className="rounded-md bg-sunken px-3 py-2 text-xs text-ink-soft">
+            <p className="border-l-4 border-tape bg-sunken px-3 py-2 text-xs text-ink-soft">
               Test mode. In production this step is Stripe Checkout and the plan changes when Stripe confirms the payment by webhook.
             </p>
           </div>
@@ -177,7 +177,7 @@ export default function BillingPage() {
           <div className="flex flex-col gap-5 text-sm">
             <div className="flex justify-between gap-4">
               <div>
-                <p className="font-display text-lg font-semibold">{state.content.siteName}</p>
+                <p className="font-stencil text-3xl uppercase">{state.content.siteName}</p>
                 <p className="text-ink-soft">{state.content.address}</p>
               </div>
               <div className="text-right">

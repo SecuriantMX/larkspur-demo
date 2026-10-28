@@ -10,8 +10,8 @@ import { ButtonLink, cx } from "./ui";
 
 const links = [
   { href: "/services", label: "Spaces" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/about", label: "About" },
+  { href: "/pricing", label: "Membership" },
+  { href: "/about", label: "The building" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -23,55 +23,60 @@ export function SiteHeader() {
   const dashboard = user?.role === "admin" ? "/admin" : "/app";
 
   return (
-    <header className="border-b border-line bg-paper">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-[max(16px,env(safe-area-inset-left))]">
+    <header className="border-b-2 border-ink bg-paper">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-[max(16px,env(safe-area-inset-left))]">
         <Logo name={content.siteName} />
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+        <nav className="hidden items-stretch self-stretch md:flex" aria-label="Main">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               className={cx(
-                "rounded-md px-3 py-2 text-sm hover:text-ink",
-                pathname === l.href ? "text-ink font-medium" : "text-ink-soft",
+                "flex items-center border-l border-line px-4 font-display text-lg font-semibold uppercase last:border-r",
+                pathname === l.href ? "bg-tape text-tape-ink" : "text-ink-soft hover:text-ink",
               )}
             >
               {l.label}
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
           {user ? (
-            <ButtonLink href={dashboard}>Go to dashboard</ButtonLink>
+            <ButtonLink href={dashboard}>My dashboard</ButtonLink>
           ) : (
             <>
-              <ButtonLink href="/login" variant="ghost">
+              <Link href="/login" className="font-display text-lg font-semibold uppercase text-ink-soft hover:text-ink">
                 Sign in
-              </ButtonLink>
-              <ButtonLink href="/signup">Create account</ButtonLink>
+              </Link>
+              <ButtonLink href="/signup">Get a key</ButtonLink>
             </>
           )}
         </div>
         <button
-          className="rounded-md p-2 md:hidden"
+          className="p-2 md:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
         >
-          {open ? <X size={20} /> : <Menu size={20} />}
+          {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-line px-[max(16px,env(safe-area-inset-left))] py-3 md:hidden" aria-label="Mobile">
+        <nav className="flex flex-col border-t border-line px-[max(16px,env(safe-area-inset-left))] py-2 md:hidden" aria-label="Mobile">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="rounded-md px-2 py-2 text-sm">
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="border-b border-line py-3 font-display text-2xl font-bold uppercase"
+            >
               {l.label}
             </Link>
           ))}
-          <div className="mt-2 flex gap-2">
+          <div className="mt-3 mb-2 flex gap-2">
             {user ? (
               <ButtonLink href={dashboard} className="flex-1">
-                Go to dashboard
+                My dashboard
               </ButtonLink>
             ) : (
               <>
@@ -79,7 +84,7 @@ export function SiteHeader() {
                   Sign in
                 </ButtonLink>
                 <ButtonLink href="/signup" className="flex-1">
-                  Create account
+                  Get a key
                 </ButtonLink>
               </>
             )}

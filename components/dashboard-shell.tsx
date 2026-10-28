@@ -56,11 +56,11 @@ export function DashboardShell({
             key={item.href}
             href={item.href}
             className={cx(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-sm",
-              isActive(item) ? "bg-accent-soft font-medium text-accent" : "text-ink-soft hover:bg-sunken hover:text-ink",
+              "flex items-center gap-3 px-3 py-2 font-display text-lg font-semibold uppercase",
+              isActive(item) ? "bg-tape text-tape-ink" : "opacity-75 hover:opacity-100",
             )}
           >
-            <Icon size={17} />
+            <Icon size={16} />
             {item.label}
           </Link>
         );
@@ -69,19 +69,19 @@ export function DashboardShell({
   );
 
   const footer = (
-    <div className="flex flex-col gap-3 border-t border-line pt-4">
+    <div className="flex flex-col gap-3 border-t border-current/20 pt-4">
       {user.role === "admin" && (
-        <Link href={role === "admin" ? "/app" : "/admin"} className="px-3 text-xs font-medium text-accent">
+        <Link href={role === "admin" ? "/app" : "/admin"} className="eyebrow px-3 underline decoration-tape decoration-2 underline-offset-4">
           {role === "admin" ? "Switch to member view" : "Open admin panel"}
         </Link>
       )}
       <div className="flex items-center gap-3 px-3">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sunken text-xs font-semibold">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-tape font-mono text-[0.6875rem] font-medium text-tape-ink">
           {initials(user.name)}
         </span>
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium">{user.name}</p>
-          <p className="truncate text-xs text-ink-soft">{user.email}</p>
+          <p className="truncate text-xs opacity-60">{user.email}</p>
         </div>
         <button
           onClick={() => {
@@ -89,7 +89,7 @@ export function DashboardShell({
             signOut();
             router.push("/");
           }}
-          className="rounded p-1.5 text-ink-soft hover:bg-sunken hover:text-ink"
+          className="p-1.5 opacity-70 hover:bg-tape hover:text-tape-ink hover:opacity-100"
           aria-label="Sign out"
           title="Sign out"
         >
@@ -100,47 +100,47 @@ export function DashboardShell({
   );
 
   return (
-    <div className="lg:grid lg:min-h-[calc(100vh-2rem)] lg:grid-cols-[15rem_1fr]">
-      <aside className="hidden border-r border-line bg-surface lg:flex lg:flex-col lg:gap-6 lg:px-3 lg:py-5">
-        <div className="flex items-center justify-between px-3">
-          <Logo name={state.content.siteName} href={role === "admin" ? "/admin" : "/app"} />
-          {role === "admin" && <span className="text-[10px] font-semibold tracking-wider text-brick uppercase">Admin</span>}
+    <div className="lg:grid lg:min-h-[calc(100vh-1.75rem)] lg:grid-cols-[15rem_1fr]">
+      <aside className="hidden bg-board text-board-ink lg:flex lg:flex-col lg:gap-6 lg:px-3 lg:py-5">
+        <div className="flex flex-col gap-3 px-3">
+          <Logo name={state.content.siteName} href={role === "admin" ? "/admin" : "/app"} inverted />
+          <p className="eyebrow opacity-60">{role === "admin" ? "Directory · Front office" : "Directory · Members"}</p>
         </div>
         <div className="flex-1">{navList}</div>
         {footer}
       </aside>
 
       <div className="min-w-0">
-        <header className="flex h-14 items-center justify-between gap-3 border-b border-line bg-surface px-[max(16px,env(safe-area-inset-left))] lg:bg-paper">
+        <header className="flex h-14 items-center justify-between gap-3 border-b-2 border-ink bg-paper px-[max(16px,env(safe-area-inset-left))]">
           <div className="flex items-center gap-2 lg:hidden">
-            <button className="rounded-md p-2" onClick={() => setMenuOpen((o) => !o)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen}>
+            <button className="p-2" onClick={() => setMenuOpen((o) => !o)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen}>
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
             <Logo name={state.content.siteName} href={role === "admin" ? "/admin" : "/app"} />
           </div>
-          <Link href="/" className="hidden text-sm text-ink-soft hover:text-ink lg:block">
-            View website
+          <Link href="/" className="eyebrow hidden text-ink-soft hover:text-ink lg:block">
+            ← Public website
           </Link>
           {role === "member" ? (
             <Link
               href="/app/notifications"
-              className="relative rounded-md p-2 text-ink-soft hover:bg-sunken hover:text-ink"
+              className="relative p-2 text-ink-soft hover:bg-tape hover:text-tape-ink"
               aria-label={`Notifications${unread ? `, ${unread} unread` : ""}`}
             >
               <Bell size={18} />
               {unread > 0 && (
-                <span className="absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brick px-1 text-[10px] font-semibold text-white">
+                <span className="absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center bg-brick px-1 font-mono text-[10px] text-white">
                   {unread}
                 </span>
               )}
             </Link>
           ) : (
-            <span className="text-xs text-ink-soft">Signed in as {user.name}</span>
+            <span className="eyebrow text-ink-soft">On duty: {user.name}</span>
           )}
         </header>
 
         {menuOpen && (
-          <div className="flex flex-col gap-4 border-b border-line bg-surface px-[max(16px,env(safe-area-inset-left))] py-4 lg:hidden">
+          <div className="flex flex-col gap-4 bg-board px-[max(16px,env(safe-area-inset-left))] py-4 text-board-ink lg:hidden">
             {navList}
             {footer}
           </div>

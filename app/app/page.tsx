@@ -31,10 +31,10 @@ export default function MemberOverview() {
 
       <div className="grid gap-4 md:grid-cols-3">
         <Panel className="p-5">
-          <p className="text-xs font-medium tracking-wide text-ink-soft uppercase">Next booking</p>
+          <p className="eyebrow text-ink-soft">Next booking</p>
           {upcoming[0] ? (
             <>
-              <p className="mt-2 font-display text-lg font-semibold">{spaceName(upcoming[0].spaceId)}</p>
+              <p className="mt-2 font-display text-3xl font-extrabold uppercase">{spaceName(upcoming[0].spaceId)}</p>
               <p className="text-sm text-ink-soft">{timeRange(upcoming[0].start, upcoming[0].end)}</p>
             </>
           ) : (
@@ -42,13 +42,13 @@ export default function MemberOverview() {
           )}
         </Panel>
         <Panel className="p-5">
-          <p className="text-xs font-medium tracking-wide text-ink-soft uppercase">Membership</p>
-          <p className="mt-2 font-display text-lg font-semibold">{plan?.name ?? "Pay as you go"}</p>
+          <p className="eyebrow text-ink-soft">Membership</p>
+          <p className="mt-2 font-display text-3xl font-extrabold uppercase">{plan?.name ?? "Pay as you go"}</p>
           <p className="text-sm text-ink-soft">{plan ? `${money(plan.monthlyPrice)} / month` : "Hourly rates apply"}</p>
         </Panel>
         <Panel className="p-5">
-          <p className="text-xs font-medium tracking-wide text-ink-soft uppercase">Open support requests</p>
-          <p className="mt-2 font-display text-lg font-semibold tabular">{openTickets.length}</p>
+          <p className="eyebrow text-ink-soft">Open support requests</p>
+          <p className="mt-2 font-stencil text-5xl leading-none tabular">{openTickets.length}</p>
           <Link href="/app/support" className="text-sm text-accent">
             Go to support
           </Link>

@@ -41,7 +41,7 @@ export function BarChart({
       {ticks.map((t) => (
         <g key={t}>
           <line x1={pad.left} x2={width - pad.right} y1={y(t)} y2={y(t)} stroke="var(--line)" strokeWidth={1} />
-          <text x={pad.left - 8} y={y(t) + 4} textAnchor="end" fontSize={11} fill="var(--ink-soft)" className="tabular">
+          <text x={pad.left - 8} y={y(t) + 4} textAnchor="end" fontSize={10} fill="var(--ink-soft)" className="tabular font-mono">
             {format(t)}
           </text>
         </g>
@@ -56,13 +56,15 @@ export function BarChart({
               y={pad.top + innerH - h}
               width={barW}
               height={Math.max(h, 0)}
-              rx={2}
-              fill={i === lastIndex ? "var(--accent)" : "color-mix(in srgb, var(--accent) 45%, transparent)"}
+                            fill={i === lastIndex ? "var(--tape)" : "var(--ink)"}
+              fillOpacity={i === lastIndex ? 1 : 0.78}
+              stroke={i === lastIndex ? "var(--ink)" : "none"}
+              strokeWidth={1.5}
             >
               <title>{`${d.label}: ${format(d.value)}`}</title>
             </rect>
             {(i % labelEvery === 0 || i === lastIndex) && (
-              <text x={x + barW / 2} y={height - 8} textAnchor="middle" fontSize={11} fill="var(--ink-soft)">
+              <text x={x + barW / 2} y={height - 8} textAnchor="middle" fontSize={10} fill="var(--ink-soft)" className="font-mono">
                 {d.label}
               </text>
             )}

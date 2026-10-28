@@ -1,14 +1,23 @@
 import Link from "next/link";
 
-export function Logo({ name, href = "/" }: { name: string; href?: string }) {
+// Wordmark set like the painted sign over the loading door, with the street number boxed beside it.
+export function Logo({ name, href = "/", inverted = false }: { name: string; href?: string; inverted?: boolean }) {
   return (
-    <Link href={href} className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
-      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-        <rect x="1" y="1" width="20" height="20" rx="4" fill="var(--accent)" />
-        <path d="M7 5v12h8" stroke="var(--accent-ink)" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-        <circle cx="14.5" cy="7.5" r="2" fill="var(--accent-ink)" />
-      </svg>
-      {name}
+    <Link href={href} className="group flex items-stretch gap-0 leading-none" aria-label={`${name} home`}>
+      <span
+        className={`flex items-center px-1.5 font-mono text-[0.625rem] font-medium ${
+          inverted ? "bg-tape text-tape-ink" : "bg-ink text-paper"
+        }`}
+      >
+        1720
+      </span>
+      <span
+        className={`flex items-center border-2 px-2 py-1 font-stencil text-xl tracking-wide uppercase ${
+          inverted ? "border-tape text-tape" : "border-ink text-ink"
+        }`}
+      >
+        {name}
+      </span>
     </Link>
   );
 }

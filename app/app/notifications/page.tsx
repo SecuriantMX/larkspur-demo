@@ -28,8 +28,8 @@ export default function NotificationsPage() {
         {notes.length ? (
           <ul className="divide-y divide-line">
             {notes.map((n) => (
-              <li key={n.id} className={cx("flex items-start gap-3 px-5 py-4", !n.read && "bg-accent-soft/50")}>
-                <span className={cx("mt-1.5 h-2 w-2 shrink-0 rounded-full", n.read ? "bg-transparent" : "bg-accent")} />
+              <li key={n.id} className={cx("flex items-start gap-3 px-5 py-4", !n.read && "border-l-4 border-tape")}>
+                <span className={cx("mt-1.5 h-2 w-2 shrink-0", n.read ? "bg-transparent" : "bg-brick")} />
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium">{n.title}</p>
                   <p className="text-sm text-ink-soft">{n.body}</p>

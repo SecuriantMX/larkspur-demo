@@ -87,7 +87,7 @@ export default function BookingsPage() {
         action={<Button onClick={() => setOpen(true)}>New booking</Button>}
       />
 
-      <div className="flex gap-1 border-b border-line" role="tablist">
+      <div className="flex gap-1 border-b-2 border-ink" role="tablist">
         {(["upcoming", "past"] as const).map((t) => (
           <button
             key={t}
@@ -95,8 +95,8 @@ export default function BookingsPage() {
             aria-selected={tab === t}
             onClick={() => setTab(t)}
             className={cx(
-              "-mb-px border-b-2 px-3 py-2 text-sm capitalize",
-              tab === t ? "border-accent font-medium text-ink" : "border-transparent text-ink-soft hover:text-ink",
+              "-mb-px border-b-2 px-3 py-2 font-display text-lg font-bold uppercase",
+              tab === t ? "border-ink bg-tape font-medium text-tape-ink" : "border-transparent text-ink-soft hover:text-ink",
             )}
           >
             {t === "past" ? "Past and cancelled" : "Upcoming"}
@@ -220,7 +220,7 @@ export default function BookingsPage() {
             </Field>
           </div>
           {space && <p className="text-sm text-ink-soft">{space.description}</p>}
-          <p className="rounded-md bg-sunken px-3 py-2 text-xs text-ink-soft">
+          <p className="border-l-4 border-tape bg-sunken px-3 py-2 text-xs text-ink-soft">
             Charged to the card on file. In this demo no real payment is taken; production uses Stripe.
           </p>
           <FormError message={error} />

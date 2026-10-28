@@ -41,8 +41,8 @@ export default function AdminTickets() {
               setSelectedId(null);
             }}
             className={cx(
-              "rounded-full border px-3 py-1 text-sm",
-              filter === f.value ? "border-accent bg-accent-soft text-accent" : "border-line text-ink-soft hover:text-ink",
+              "border-2 px-3 py-1 font-display text-base font-bold uppercase",
+              filter === f.value ? "border-ink bg-tape text-tape-ink" : "border-line text-ink-soft hover:border-ink hover:text-ink",
             )}
           >
             {f.label}
@@ -59,7 +59,10 @@ export default function AdminTickets() {
                 <li key={t.id}>
                   <button
                     onClick={() => setSelectedId(t.id)}
-                    className={cx("flex w-full flex-col gap-1 px-4 py-3 text-left", selected?.id === t.id ? "bg-accent-soft" : "hover:bg-sunken")}
+                    className={cx(
+                      "flex w-full flex-col gap-1 border-l-[6px] px-4 py-3 text-left",
+                      selected?.id === t.id ? "border-tape bg-sunken" : "border-transparent hover:bg-sunken",
+                    )}
                   >
                     <span className="flex items-center justify-between gap-2">
                       <span className="truncate text-sm font-medium">{t.name}</span>
@@ -90,7 +93,7 @@ export default function AdminTickets() {
               </div>
               <TicketThread key={selected.id} ticket={selected} staffView />
               {!selected.userId && (
-                <p className="rounded-md bg-sunken px-3 py-2 text-xs text-ink-soft">
+                <p className="border-l-4 border-tape bg-sunken px-3 py-2 text-xs text-ink-soft">
                   Sent from the website by someone without an account. Replies go to {selected.email}.
                 </p>
               )}

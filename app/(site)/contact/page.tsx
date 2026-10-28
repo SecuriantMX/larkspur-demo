@@ -25,33 +25,33 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="mx-auto grid max-w-6xl gap-12 px-[max(16px,env(safe-area-inset-left))] pt-12 lg:grid-cols-[1fr_1.2fr]">
+    <div className="mx-auto grid max-w-7xl gap-12 px-[max(16px,env(safe-area-inset-left))] pt-12 lg:grid-cols-[1fr_1.2fr]">
       <div>
-        <h1 className="font-display text-4xl font-semibold tracking-tight">Talk to the front desk</h1>
+        <h1 className="sign text-6xl sm:text-7xl">Talk to the front desk</h1>
         <p className="mt-3 max-w-md text-ink-soft">
           Questions about memberships, team space or a booking. Messages go straight to the support inbox and we reply by email within one business day.
         </p>
         <dl className="mt-8 flex flex-col gap-4 text-sm">
           <div>
-            <dt className="text-ink-soft">Email</dt>
+            <dt className="eyebrow text-ink-soft">Email</dt>
             <dd className="font-medium select-all">{content.contactEmail}</dd>
           </div>
           <div>
-            <dt className="text-ink-soft">Phone</dt>
+            <dt className="eyebrow text-ink-soft">Phone</dt>
             <dd className="font-medium select-all">{content.contactPhone}</dd>
           </div>
           <div>
-            <dt className="text-ink-soft">Visit</dt>
+            <dt className="eyebrow text-ink-soft">Visit</dt>
             <dd className="font-medium">{content.address}</dd>
             <dd className="text-ink-soft">{content.hours}</dd>
           </div>
         </dl>
       </div>
 
-      <div className="rounded-lg border border-line bg-surface p-6">
+      <div className="border-2 border-ink border-t-[6px] border-t-tape bg-surface p-6">
         {sent ? (
           <div className="flex flex-col gap-2 py-8 text-center">
-            <p className="font-display text-xl font-semibold">Message received</p>
+            <p className="sign text-4xl">Message received</p>
             <p className="text-sm text-ink-soft">It&apos;s in our support inbox. We&apos;ll reply to the email you gave us.</p>
             <Button variant="secondary" className="mx-auto mt-4" onClick={() => setSent(false)}>
               Send another message

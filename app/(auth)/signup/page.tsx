@@ -31,7 +31,7 @@ export default function SignupPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="font-display text-2xl font-semibold tracking-tight">Create your account</h1>
+        <h1 className="sign text-5xl">Create your account</h1>
         <p className="mt-1 text-sm text-ink-soft">
           Already a member?{" "}
           <Link href="/login" className="font-medium text-accent">

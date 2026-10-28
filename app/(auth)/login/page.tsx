@@ -33,7 +33,7 @@ export default function LoginPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="font-display text-2xl font-semibold tracking-tight">Sign in</h1>
+        <h1 className="sign text-5xl">Sign in</h1>
         <p className="mt-1 text-sm text-ink-soft">
           New here?{" "}
           <Link href="/signup" className="font-medium text-accent">
@@ -68,8 +68,8 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      <div className="rounded-md border border-dashed border-line p-3 text-sm">
-        <p className="font-medium">Try a demo account</p>
+      <div className="border-2 border-dashed border-ink p-3 text-sm">
+        <p className="eyebrow">Try a demo key</p>
         <div className="mt-2 flex gap-2">
           {demoAccounts.map((a) => (
             <Button

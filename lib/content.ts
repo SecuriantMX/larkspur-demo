@@ -50,6 +50,7 @@ export const defaultContent: SiteContent = {
 export const defaultSpaces: Space[] = [
   {
     id: "sp-fieldstone",
+    unit: "1A",
     name: "Fieldstone Room",
     kind: "Meeting room",
     description: "Exposed brick, 75\" display, whiteboard wall. Good for client meetings and workshops.",
@@ -59,6 +60,7 @@ export const defaultSpaces: Space[] = [
   },
   {
     id: "sp-canal",
+    unit: "1C",
     name: "Canal Room",
     kind: "Meeting room",
     description: "Our largest room, with views over the canal walk. Video conferencing kit included.",
@@ -68,6 +70,7 @@ export const defaultSpaces: Space[] = [
   },
   {
     id: "sp-studio",
+    unit: "2A",
     name: "Podcast Studio",
     kind: "Studio",
     description: "Treated room with three Shure SM7B mics, a RodeCaster Pro II and a recording laptop.",
@@ -77,6 +80,7 @@ export const defaultSpaces: Space[] = [
   },
   {
     id: "sp-office-2b",
+    unit: "2B",
     name: "Office 2B",
     kind: "Private office",
     description: "Lockable office for up to four people. Book it by the hour for focused team days.",
@@ -86,6 +90,7 @@ export const defaultSpaces: Space[] = [
   },
   {
     id: "sp-desk",
+    unit: "2D",
     name: "Quiet Floor Desk",
     kind: "Desk",
     description: "Hot desk on the silent second floor. Monitor, dock and locker included.",

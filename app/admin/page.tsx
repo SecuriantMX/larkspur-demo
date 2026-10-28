@@ -90,8 +90,8 @@ export default function AdminAnalytics() {
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {kpis.map((k) => (
           <Panel key={k.label} className="flex flex-col gap-1 p-5">
-            <p className="text-xs font-medium tracking-wide text-ink-soft uppercase">{k.label}</p>
-            <p className="tabular font-display text-2xl font-semibold">{k.value}</p>
+            <p className="eyebrow text-ink-soft">{k.label}</p>
+            <p className="tabular font-stencil text-4xl leading-none">{k.value}</p>
             <div className="text-xs text-ink-soft">{k.badge ?? k.note}</div>
           </Panel>
         ))}
@@ -124,8 +124,8 @@ export default function AdminAnalytics() {
                     {count} · {money(count * plan.monthlyPrice)}/mo
                   </span>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-sunken">
-                  <div className="h-full rounded-full bg-accent" style={{ width: `${subscribed ? (count / subscribed) * 100 : 0}%` }} />
+                <div className="h-3 overflow-hidden border border-ink bg-paper">
+                  <div className="h-full bg-tape" style={{ width: `${subscribed ? (count / subscribed) * 100 : 0}%` }} />
                 </div>
               </li>
             ))}

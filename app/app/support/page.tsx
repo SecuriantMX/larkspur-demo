@@ -48,7 +48,10 @@ export default function SupportPage() {
                 <li key={t.id}>
                   <button
                     onClick={() => setSelectedId(t.id)}
-                    className={cx("flex w-full flex-col gap-1 px-4 py-3 text-left", selected?.id === t.id ? "bg-accent-soft" : "hover:bg-sunken")}
+                    className={cx(
+                      "flex w-full flex-col gap-1 border-l-[6px] px-4 py-3 text-left",
+                      selected?.id === t.id ? "border-tape bg-sunken" : "border-transparent hover:bg-sunken",
+                    )}
                   >
                     <span className="truncate text-sm font-medium">{t.subject}</span>
                     <span className="flex items-center justify-between gap-2 text-xs text-ink-soft">

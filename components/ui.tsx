@@ -7,14 +7,21 @@ import { X } from "lucide-react";
 const cx = (...parts: Array<string | false | null | undefined>) => parts.filter(Boolean).join(" ");
 export { cx };
 
-type Variant = "primary" | "secondary" | "ghost" | "danger";
+type Variant = "primary" | "secondary" | "ghost" | "danger" | "tape";
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-accent-ink hover:opacity-90",
-  secondary: "bg-surface text-ink border border-line hover:bg-sunken",
+  primary: "bg-accent text-accent-ink hover:bg-tape hover:text-tape-ink border-2 border-accent hover:border-tape",
+  secondary: "border-2 border-ink text-ink hover:bg-ink hover:text-paper",
   ghost: "text-ink-soft hover:text-ink hover:bg-sunken",
-  danger: "bg-bad-soft text-bad hover:opacity-90",
+  danger: "border-2 border-bad text-bad hover:bg-bad hover:text-paper",
+  tape: "border-2 border-tape bg-tape text-tape-ink hover:border-paper hover:bg-paper hover:text-ink",
 };
-const sizes = { sm: "h-8 px-3 text-sm", md: "h-10 px-4 text-sm", lg: "h-12 px-5 text-base" };
+const sizes = {
+  sm: "h-8 px-3 text-[0.95rem]",
+  md: "h-10 px-4 text-[1.05rem]",
+  lg: "h-13 px-6 text-xl",
+};
+const buttonBase =
+  "inline-flex items-center justify-center gap-2 font-display font-bold uppercase tracking-wide transition-colors disabled:cursor-not-allowed disabled:opacity-40";
 
 export function Button({
   variant = "primary",
@@ -25,7 +32,7 @@ export function Button({
   return (
     <button
       className={cx(
-        "inline-flex items-center justify-center gap-2 rounded-md font-medium transition disabled:cursor-not-allowed disabled:opacity-50",
+        buttonBase,
         variants[variant],
         sizes[size],
         className,
@@ -44,7 +51,7 @@ export function ButtonLink({
   return (
     <Link
       className={cx(
-        "inline-flex items-center justify-center gap-2 rounded-md font-medium transition",
+        buttonBase,
         variants[variant],
         sizes[size],
         className,
@@ -57,7 +64,7 @@ export function ButtonLink({
 export function Field({ label, hint, htmlFor, children }: { label: string; hint?: string; htmlFor: string; children: ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={htmlFor} className="text-sm font-medium">
+      <label htmlFor={htmlFor} className="eyebrow text-ink-soft">
         {label}
       </label>
       {children}
@@ -67,7 +74,7 @@ export function Field({ label, hint, htmlFor, children }: { label: string; hint?
 }
 
 const control =
-  "w-full rounded-md border border-line bg-surface px-3 text-sm text-ink placeholder:text-ink-soft/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25";
+  "w-full border border-line border-b-2 border-b-ink bg-surface px-3 text-sm text-ink placeholder:text-ink-soft/70 focus:border-ink focus:outline-none focus:shadow-[0_3px_0_0_var(--tape)]";
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
   return <input className={cx(control, "h-10", className)} {...props} />;
@@ -83,29 +90,34 @@ export function Select({ className, ...props }: ComponentProps<"select">) {
 
 type Tone = "neutral" | "accent" | "good" | "warn" | "bad";
 const tones: Record<Tone, string> = {
-  neutral: "bg-sunken text-ink-soft",
-  accent: "bg-accent-soft text-accent",
-  good: "bg-good-soft text-good",
-  warn: "bg-warn-soft text-warn",
-  bad: "bg-bad-soft text-bad",
+  neutral: "border-line text-ink-soft",
+  accent: "border-tape bg-tape text-tape-ink",
+  good: "border-good text-good",
+  warn: "border-warn bg-warn-soft text-warn",
+  bad: "border-bad text-bad",
 };
 
 export function Badge({ tone = "neutral", children }: { tone?: Tone; children: ReactNode }) {
   return (
-    <span className={cx("inline-flex h-6 items-center rounded-full px-2.5 text-xs font-medium whitespace-nowrap", tones[tone])}>
+    <span
+      className={cx(
+        "inline-flex h-[1.375rem] items-center border px-1.5 font-mono text-[0.625rem] font-medium tracking-wider whitespace-nowrap uppercase",
+        tones[tone],
+      )}
+    >
       {children}
     </span>
   );
 }
 
 export function Panel({ className, children }: { className?: string; children: ReactNode }) {
-  return <section className={cx("rounded-lg border border-line bg-surface", className)}>{children}</section>;
+  return <section className={cx("border border-line bg-surface", className)}>{children}</section>;
 }
 
 export function PanelHeader({ title, action }: { title: string; action?: ReactNode }) {
   return (
-    <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-3.5">
-      <h2 className="text-sm font-semibold">{title}</h2>
+    <div className="flex items-center justify-between gap-3 border-b-2 border-ink px-5 py-3">
+      <h2 className="eyebrow font-medium">{title}</h2>
       {action}
     </div>
   );
@@ -113,10 +125,10 @@ export function PanelHeader({ title, action }: { title: string; action?: ReactNo
 
 export function PageHeader({ title, description, action }: { title: string; description?: string; action?: ReactNode }) {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-4">
+    <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-ink pb-4">
       <div className="min-w-0">
-        <h1 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h1>
-        {description && <p className="mt-1 text-sm text-ink-soft">{description}</p>}
+        <h1 className="sign text-5xl sm:text-6xl">{title}</h1>
+        {description && <p className="mt-2 text-sm text-ink-soft">{description}</p>}
       </div>
       {action}
     </div>
@@ -126,7 +138,7 @@ export function PageHeader({ title, description, action }: { title: string; desc
 export function EmptyState({ title, body, action }: { title: string; body: string; action?: ReactNode }) {
   return (
     <div className="flex flex-col items-center gap-2 px-6 py-12 text-center">
-      <p className="font-medium">{title}</p>
+      <p className="sign text-2xl">{title}</p>
       <p className="max-w-sm text-sm text-ink-soft">{body}</p>
       {action && <div className="mt-2">{action}</div>}
     </div>
@@ -137,7 +149,7 @@ export function TableWrap({ children }: { children: ReactNode }) {
   return <div className="relative overflow-x-auto">{children}</div>;
 }
 
-export const th = "px-5 py-2.5 text-left text-xs font-medium uppercase tracking-wide text-ink-soft whitespace-nowrap";
+export const th = "px-5 py-2.5 text-left font-mono text-[0.625rem] font-medium uppercase tracking-wider text-ink-soft whitespace-nowrap";
 export const td = "px-5 py-3 text-sm align-middle";
 
 export function Modal({
@@ -166,11 +178,11 @@ export function Modal({
       ref={ref}
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
-      className="m-auto w-[min(32rem,calc(100vw-2rem))] rounded-lg border border-line bg-surface p-0 text-ink shadow-xl backdrop:bg-black/40"
+      className="m-auto w-[min(32rem,calc(100vw-2rem))] border-2 border-ink border-t-[6px] border-t-tape bg-surface p-0 text-ink shadow-[8px_8px_0_0_var(--ink)] backdrop:bg-black/50"
     >
-      <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
-        <h2 className="font-semibold">{title}</h2>
-        <button onClick={onClose} className="rounded p-1 text-ink-soft hover:bg-sunken hover:text-ink" aria-label="Close">
+      <div className="flex items-center justify-between border-b border-line px-5 py-3">
+        <h2 className="sign text-2xl">{title}</h2>
+        <button onClick={onClose} className="p-1 text-ink-soft hover:bg-sunken hover:text-ink" aria-label="Close">
           <X size={18} />
         </button>
       </div>
@@ -183,7 +195,7 @@ export function Modal({
 export function FormError({ message }: { message: string | null }) {
   if (!message) return null;
   return (
-    <p role="alert" className="rounded-md bg-bad-soft px-3 py-2 text-sm text-bad">
+    <p role="alert" className="border-l-4 border-bad bg-bad-soft px-3 py-2 text-sm text-bad">
       {message}
     </p>
   );

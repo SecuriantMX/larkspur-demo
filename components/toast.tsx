@@ -24,7 +24,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {toasts.map((t) => (
           <div
             key={t.id}
-            className="pointer-events-auto flex items-center gap-2 rounded-md border border-line bg-surface px-4 py-2.5 text-sm shadow-lg"
+            className="pointer-events-auto flex items-center gap-2 border-2 border-ink bg-surface px-4 py-2.5 text-sm shadow-[4px_4px_0_0_var(--ink)]"
           >
             {t.tone === "good" ? <CheckCircle2 size={16} className="text-good" /> : <AlertCircle size={16} className="text-bad" />}
             {t.message}
